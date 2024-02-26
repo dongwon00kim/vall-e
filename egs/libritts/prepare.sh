@@ -55,7 +55,7 @@ out_dir=/workspace/data/prepared
 dataset_parts="--dataset-parts all"  # all
 
 audio_extractor="Encodec"  # or Fbank
-audio_feats_dir=/workspace/data/prepared/LibriTTSdata/tokenized
+audio_feats_dir=/workspace/data/prepared/LibriTTS/tokenized
 
 . shared/parse_options.sh || exit 1
 
@@ -89,10 +89,10 @@ if [ $stage -le 1 ] && [ $stop_stage -ge 1 ]; then
   log "Stage 1: Prepare LibriTTS manifest"
   # We assume that you have downloaded the LibriTTS corpus
   # to $dl_dir/LibriTTS
-  mkdir -p $out_dir/LibriTTSdata/manifests
-  if [ ! -e $out_dir/LibriTTSdata/manifests/.libritts.done ]; then
-    lhotse prepare libritts ${dataset_parts} -j $nj $dl_dir/LibriTTS $out_dir/LibriTTSdata/manifests
-    touch $out_dir/LibriTTSdata/manifests/.libritts.done
+  mkdir -p $out_dir/LibriTTS/manifests
+  if [ ! -e $out_dir/LibriTTS/manifests/.libritts.done ]; then
+    lhotse prepare libritts ${dataset_parts} -j $nj $dl_dir/LibriTTS $out_dir/LibriTTS/manifests
+    touch $out_dir/LibriTTS/manifests/.libritts.done
   fi
 fi
 
@@ -104,7 +104,7 @@ if [ $stage -le 2 ] && [ $stop_stage -ge 2 ]; then
     python3 bin/tokenizer.py --dataset-parts "${dataset_parts}" \
         --audio-extractor ${audio_extractor} \
         --batch-duration 400 \
-        --src-dir "$out_dir/LibriTTSdata/manifests" \
+        --src-dir "$out_dir/LibriTTS/manifests" \
         --output-dir "${audio_feats_dir}"
   fi
   touch ${audio_feats_dir}/.libritts.tokenize.done
