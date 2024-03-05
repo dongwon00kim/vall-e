@@ -712,7 +712,7 @@ def train_one_epoch(
                         model_cur=model,
                         model_avg=model_avg,
                     )
-             
+
         if (
             params.batch_idx_train > 0
             and params.batch_idx_train % params.save_every_n == 0
@@ -736,7 +736,7 @@ def train_one_epoch(
                     topk=params.keep_last_k,
                     rank=rank,
                 )
-         
+
         if batch_idx % 100 == 0 and params.dtype in ["float16", "fp16"]:
             # If the grad scale was less than 1, try increasing it.    The _growth_interval
             # of the grad scaler is configurable, but we can't configure it to have different
@@ -999,7 +999,7 @@ def run(rank, world_size, args):
 
     dataset = TtsDataModule(args)
     train_cuts = dataset.train_cuts()
-    valid_cuts = dataset.dev_cuts()
+    valid_cuts = dataset.valid_cuts()
 
     train_cuts = filter_short_and_long_utterances(
         train_cuts, params.filter_min_duration, params.filter_max_duration

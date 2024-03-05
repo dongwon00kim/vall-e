@@ -17,7 +17,7 @@ stop_stage=3
 #      You can download LibriTTS from https://www.openslr.org/60/
 # After downloading tar.gz files, you should extract them into dl_dir/LibriTTS.
 # Ignoring *.tar.gz files, which you can download into anywhere, the structure of $dl_dir should look like below
-# 
+#
 # dl_dir
 # ├── dev-clean.tar.gz
 # ├── dev-other.tar.gz
@@ -124,7 +124,7 @@ if [ $stage -le 3 ] && [ $stop_stage -ge 3 ]; then
       # dev
       lhotse copy \
         ${audio_feats_dir}/libritts_cuts_dev-clean.jsonl.gz \
-        ${audio_feats_dir}/cuts_dev.jsonl.gz
+        ${audio_feats_dir}/cuts_valid.jsonl.gz
     else  # debug
       # train
       lhotse copy \
@@ -133,7 +133,7 @@ if [ $stage -le 3 ] && [ $stop_stage -ge 3 ]; then
       # dev
       lhotse subset --first 400 \
         ${audio_feats_dir}/libritts_cuts_test-clean.jsonl.gz \
-        ${audio_feats_dir}/cuts_dev.jsonl.gz
+        ${audio_feats_dir}/cuts_valid.jsonl.gz
     fi
 
     # test
