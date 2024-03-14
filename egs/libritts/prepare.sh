@@ -48,7 +48,7 @@ stop_stage=3
 echo "We will download the LibriTTS dataset by default. If the downloading fails or you want to download the dataset yourself, see the comments in this script for steps."
 
 #dl_dir=$PWD/download
-dl_dir=/workspace/data
+dl_dir=/workspace/data/original
 out_dir=/workspace/data/prepared
 
 # dataset_parts="-p dev-clean -p test-clean"  # debug
